@@ -6,9 +6,9 @@ dataSources:
     name: Contract
     network: mumbai
     source:
-      address: "0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
+      address: "0xE89769c239c560F6D8d49948BABC2BC3EdC54A8D"
       abi: Contract
-      startBlock: 40035652
+      startBlock: 40969953
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -17,6 +17,7 @@ dataSources:
         - Approval
         - ApprovalForAll
         - BatchMetadataUpdate
+        - Donation
         - MarketItemCreated
         - MetadataUpdate
         - Transfer
@@ -30,6 +31,8 @@ dataSources:
           handler: handleApprovalForAll
         - event: BatchMetadataUpdate(uint256,uint256)
           handler: handleBatchMetadataUpdate
+        - event: Donation(indexed address,string,string,uint256,uint256)
+          handler: handleDonation
         - event: MarketItemCreated(indexed uint256,address,address,uint256,bool)
           handler: handleMarketItemCreated
         - event: MetadataUpdate(uint256)

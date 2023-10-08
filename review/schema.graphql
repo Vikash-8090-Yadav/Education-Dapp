@@ -27,6 +27,18 @@ type BatchMetadataUpdate @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+type Donation @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes! # address
+  name: String! # string
+  message: String! # string
+  timestamp: BigInt! # uint256
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type MarketItemCreated @entity(immutable: true) {
   id: Bytes!
   tokenId: BigInt! # uint256

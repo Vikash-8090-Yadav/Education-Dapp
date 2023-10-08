@@ -19,7 +19,7 @@ contract NFTMarketplace is ERC721URIStorage {
     address payable owner;
 
     mapping(uint256 => MarketItem) private idToMarketItem;
-
+    event Donation(address indexed from, string name, string message, uint256 timestamp, uint256 amount);
   struct Memo{
         string name;
         string message;
@@ -202,17 +202,21 @@ contract NFTMarketplace is ERC721URIStorage {
     // Reviews course 
 
     // actual function with the help of which we can receive funds
-    function buyChai(string memory name,string memory message ) public payable{
-        require(msg.value>0,"Please pay something greater than 0");
-        Rowner.transfer(msg.value); // will transfer donators money to smart contract owner
-        memos.push(Memo(name,message,block.timestamp,msg.sender)); // now we will add that donator to our donators list
+    function buyChai(string memory name, string memory message) public payable {
+        require(msg.value > 0, "Please pay something greater than 0");
+        Rowner.transfer(msg.value); // Will transfer donator's money to the smart contract owner
+        memos.push(Memo(name, message, block.timestamp, msg.sender)); // Now we will add that donator to our donators list
+
+        // Emit the Donation event
+        emit Donation(msg.sender, name, message, block.timestamp, msg.value);
     }
 
-    // you can get list of all donators and the total holdings of funds by this function on frontend
-    function getMemos() public view returns(Memo[] memory ){
-        return(memos);
+    // You can get a list of all donators and the total holdings of funds by this function on the frontend
+    function getMemos() public view returns (Memo[] memory) {
+        return memos;
     }
-    function getBalance() public view returns(uint256){
+
+    function getBalance() public view returns (uint256) {
         return Rowner.balance;
     }
 

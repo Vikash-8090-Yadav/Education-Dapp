@@ -2,6 +2,7 @@ import {
   Approval as ApprovalEvent,
   ApprovalForAll as ApprovalForAllEvent,
   BatchMetadataUpdate as BatchMetadataUpdateEvent,
+  Donation as DonationEvent,
   MarketItemCreated as MarketItemCreatedEvent,
   MetadataUpdate as MetadataUpdateEvent,
   Transfer as TransferEvent
@@ -10,6 +11,7 @@ import {
   Approval,
   ApprovalForAll,
   BatchMetadataUpdate,
+  Donation,
   MarketItemCreated,
   MetadataUpdate,
   Transfer
@@ -53,6 +55,23 @@ export function handleBatchMetadataUpdate(
   )
   entity._fromTokenId = event.params._fromTokenId
   entity._toTokenId = event.params._toTokenId
+
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+
+  entity.save()
+}
+
+export function handleDonation(event: DonationEvent): void {
+  let entity = new Donation(
+    event.transaction.hash.concatI32(event.logIndex.toI32())
+  )
+  entity.from = event.params.from
+  entity.name = event.params.name
+  entity.message = event.params.message
+  entity.timestamp = event.params.timestamp
+  entity.amount = event.params.amount
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
