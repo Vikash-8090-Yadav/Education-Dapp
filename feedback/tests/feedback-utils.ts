@@ -7,7 +7,7 @@ import {
   MarketItemCreated,
   MetadataUpdate,
   Transfer
-} from "../generated/Contract/Contract"
+} from "../generated/feedback/feedback"
 
 export function createApprovalEvent(
   owner: Address,

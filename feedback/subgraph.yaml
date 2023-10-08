@@ -3,11 +3,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: Contract
+    name: feedback
     network: mumbai
     source:
       address: "0xF2B8a621d0F517e9F756fDC2E69d2d70eB968174"
-      abi: Contract
+      abi: feedback
       startBlock: 40035652
     mapping:
       kind: ethereum/events
@@ -21,8 +21,8 @@ dataSources:
         - MetadataUpdate
         - Transfer
       abis:
-        - name: Contract
-          file: ./abis/Contract.json
+        - name: feedback
+          file: ./abis/feedback.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,indexed uint256)
           handler: handleApproval
@@ -36,4 +36,4 @@ dataSources:
           handler: handleMetadataUpdate
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/contract.ts
+      file: ./src/feedback.ts

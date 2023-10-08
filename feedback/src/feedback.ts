@@ -5,7 +5,7 @@ import {
   MarketItemCreated as MarketItemCreatedEvent,
   MetadataUpdate as MetadataUpdateEvent,
   Transfer as TransferEvent
-} from "../generated/Contract/Contract"
+} from "../generated/feedback/feedback"
 import {
   Approval,
   ApprovalForAll,
