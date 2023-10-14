@@ -1,0 +1,54 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Contract
+    network: mumbai
+    source:
+      address: "0xe589368bd5B640A76b533240BE31962c75ded498"
+      abi: Contract
+      startBlock: 41055540
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - BatchMetadataUpdate
+        - ChaiBought
+        - Donation
+        - ListingPriceUpdated
+        - MarketItemCreated
+        - MarketSale
+        - MetadataUpdate
+        - TokenResold
+        - Transfer
+      abis:
+        - name: Contract
+          file: Contract/abis/Contract.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: BatchMetadataUpdate(uint256,uint256)
+          handler: handleBatchMetadataUpdate
+        - event: ChaiBought(string,string,uint256,address,uint256)
+          handler: handleChaiBought
+        - event: Donation(indexed address,string,string,uint256,uint256)
+          handler: handleDonation
+        - event: ListingPriceUpdated(uint256)
+          handler: handleListingPriceUpdated
+        - event: MarketItemCreated(indexed uint256,address,address,uint256,bool)
+          handler: handleMarketItemCreated
+        - event: MarketSale(indexed uint256,address,address,uint256)
+          handler: handleMarketSale
+        - event: MetadataUpdate(uint256)
+          handler: handleMetadataUpdate
+        - event: TokenResold(indexed uint256,address,address,uint256)
+          handler: handleTokenResold
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: Contract/Contract.wasm

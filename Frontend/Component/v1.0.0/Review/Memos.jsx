@@ -1,3 +1,6 @@
+// Endpoint for  olx Subgraph endpoints:
+// Queries (HTTP):     https://api.studio.thegraph.com/query/54911/olx-marketplac/v0.0.1
+
 import { useState, useEffect } from "react";
 import { createClient } from "urql";
 
